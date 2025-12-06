@@ -7,7 +7,7 @@
 
 # Upload Event Types to Svix - GitHub Action
 
-This GitHub action reads and uploads an OpenAPI spec (in JSON or YAML) format and uploads it to Svix to create event types for your webhooks.
+This GitHub action reads and uploads an OpenAPI spec (in JSON or YAML format) and uploads it to Svix to create event types for your webhooks.
 For more information, check out [our docs](https://docs.svix.com/event-types#upload-openapi-specification).
 
 ## Inputs
@@ -22,10 +22,14 @@ Location of the OpenAPI spec file (can be in JSON or YAML format).
 **Required**  
 Your [Svix API key](https://docs.svix.com/api-keys). 
 
-### `svix-region`
+### `svix-api-url`
 
-**Optional** (default is `us`)  
-The Svix region you want to upload to. The options are `us` and `eu`.
+**Optional**
+Override the Svix API URL. If not set, the URL will be determined using the API Key.
+
+### `replace-all`
+**Optional**
+If true, archives all existing event types that are not in the OpenAPI spec. Default: `false`.
 
 ## Usage
 
@@ -33,11 +37,10 @@ To use this GitHub Action in your workflow, you can add the following step:
 
 ```yaml
 - name: Upload Event Types to Svix
-  uses: svix/svix-event-type-import-action@v1
+  uses: svix/svix-event-type-import-action@v1.0.0
   with:
-    openapi-file: 'path/to/your/openapi-spec.yml'
+    openapi-file: 'path/to/your/openapi-spec.yml' # can be a .json too
     svix-api-key: ${{ secrets.SVIX_API_KEY }}
-    svix-region: 'eu' # Optional, default is 'us'
 ```
 
 ## Documentation
